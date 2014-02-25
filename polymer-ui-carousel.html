@@ -1,0 +1,299 @@
+<!doctype html>
+<html class="polymer-ui-full-bleed">
+  <head>
+    <title>polymer-ui-animated-pages</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- load toolkit -->
+    <script src="../platform/platform.js"></script>
+    <!-- import elements-->
+    <link rel="import" href="../polymer-animation/polymer-animation.html">
+    <link rel="import" href="../polymer-animation/polymer-animation-group.html">
+    <link rel="import" href="../polymer-ui-toolbar/polymer-ui-toolbar.html">
+    <link rel="import" href="../polymer-ui-animated-pages/polymer-ui-animated-pages.html">
+    <!-- -->
+    <link rel="stylesheet" href="../polymer-ui-base-css/base.css">
+    <style>
+      polymer-ui-carousel {
+        display: block;
+        height: 450px;
+        width: 800px;
+        background: #4285f4;
+        margin: 30px;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="polymer-ui-body-text polymer-ui-full-bleed polymer-ui-light-bg" unresolved>
+
+    <polymer-element name="transition-hslide-scale-out" extends="polymer-animation-group" noscript>
+      <template>
+        <polymer-animation id="scale-out" duration="0.5">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="scale(1)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="scale(0.8)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+        <polymer-animation id="hslide-in" duration="0.5">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="translateX(100%)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="translateX(0)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+      </template>
+    </polymer-element>
+    <polymer-element name="polymer-ui-carousel">
+      <template>
+        <style>
+          polymer-ui-toolbar {
+            padding: 10px;
+          }
+          polymer-ui-toolbar label {
+            font-size: 12px;
+          }
+          polymer-ui-toolbar .spacer {
+            display: inline-block;
+            width: 5px;
+          }
+          polymer-ui-animated-pages {
+            display: block;
+            height: 100%;
+          }
+          polymer-ui-animated-pages > div {
+            display: -webkit-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: white;
+          }
+
+          .btn {
+            cursor: pointer;
+            z-index: 1000;
+            width: 24px;
+            height: 24px;
+            display: block;
+            opacity: .7;
+            border:0;
+          }
+
+          .btn-prev {
+            left: 0;
+            background: url(assets/sh_prev.svg);
+          }
+
+          .btn-next {
+            background: url(assets/sh_next.svg); 
+            left: 40px;
+          }
+
+          #controls {
+            margin-left:120px;
+          }
+
+          #controls button {
+            border:0px;
+            background:transparent;
+          }
+
+          .selected {
+            color: #4285f4;
+          }
+        </style>
+
+        <polymer-ui-animated-pages id="pages" selected="{{page}}" directional?="{{directional}}" transition="{{transition}}" on-polymer-pages-animation-end="{{animationEndAction}}">
+
+          <div title="Functional">One</div>
+          <div title="Reusable">Two</div>
+          <div title="Encapsulated">Three</div>
+          <div title="Configurable">Four</div>
+          <div title="Composable">Five</div>
+
+        </polymer-ui-animated-pages>
+
+        <polymer-ui-toolbar>
+        <!--
+          <button on-tap="{{rewindAction}}">&laquo;</button>
+          <button on-tap="{{forwardAction}}">&raquo;</button>
+-->
+          <button class="btn btn-prev" on-tap="{{rewindAction}}"></button>
+          <button class="btn btn-next" on-tap="{{forwardAction}}"></button>
+
+          <div id="controls">
+            <template repeat="{{ item in itemList }}">
+              <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{item.value}} </button>
+            </template>
+          </div>
+          <!--
+          <span class="spacer"></span>
+          <button>+</button>
+          <span class="spacer"></span>
+        -->
+        <!--
+          <label>
+            Directional:
+            <input type="checkbox" checked="{{directional}}">
+          </label>
+          <span class="spacer"></span>
+          <label>
+            Str Trans:
+            <input type="checkbox" checked="{{transitionIsString}}">
+          </label>
+        -->
+          <!--
+          <span class="spacer"></span>
+          <label>
+            TransIn:
+            <select id="transitionInSelect" selectedIndex="{{transitionInIndex}}">
+              <option>none</option>
+              <option>fade-in</option>
+              <option>hslide-in</option>
+            </select>
+          </label>
+          <span class="spacer"></span>
+          <label>
+            TransOut:
+            <select id="transitionOutSelect" selectedIndex="{{transitionOutIndex}}">
+              <option>none</option>
+              <option>fade-out</option>
+              <option>hslide-out</option>
+              <option>scale-out</option>
+            </select>
+          </label>
+        -->
+          <!--
+          <span class="spacer"></span>
+          <label>
+            Duration:
+            <input value="{{duration}}" size="4">
+          </label>
+          -->
+        </polymer-ui-toolbar>
+
+        <polymer-animation id="fade-in" duration="{{duration}}">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="opacity" value="0"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="opacity" value="1"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+        <polymer-animation id="fade-out" duration="{{duration}}">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="opacity" value="1"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="opacity" value="0"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+        <polymer-animation id="hslide-in" duration="{{duration}}">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="translateX(100%)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="translateX(0)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+        <polymer-animation id="hslide-out" duration="{{duration}}">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="translateX(0)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="translateX(-100%)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+        <polymer-animation id="scale-out" duration="{{duration}}">
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="scale(1)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+          <polymer-animation-keyframe>
+            <polymer-animation-prop name="transform" value="scale(0.8)"></polymer-animation-prop>
+          </polymer-animation-keyframe>
+        </polymer-animation>
+      </template>
+      <script>
+        Polymer('polymer-ui-carousel', {
+          page: 0,
+          directional: true,
+          transitionIsString: false,
+          duration: 0.5,
+          transitionInIndex: 2,
+          transitionOutIndex: 2,
+          itemList: [],
+          observe: {
+            transitionInIndex: 'makeTransition',
+            transitionOutIndex: 'makeTransition'
+          },
+          ready: function() {
+            this.transitionIsStringChanged();
+            this.$.pages.items.forEach(function(node, index){
+              this.itemList.push({ value: node.getAttribute('title'), index: index });
+            }.bind(this));
+          },
+          makeTransition: function() {
+            if (!this.transitionIsString) {
+              //var transitionInId = this.$.transitionInSelect.selectedOptions[0].textContent;
+
+              var transitionInId = 'hslide-in';
+              var transitionIn = this.$[transitionInId];
+
+              //var transitionOutId = this.$.transitionOutSelect.selectedOptions[0].textContent;
+              var transitionOutId = 'hslide-out';
+              var transitionOut = this.$[transitionOutId];
+              if (transitionIn && transitionOut) {
+                var transition = document.createElement('polymer-animation-group');
+                transition.appendChild(transitionOut.cloneNode(true));
+                transition.appendChild(transitionIn.cloneNode(true));
+                if (this.transition && typeof(this.transition) !== 'string') {
+                  this.transition.unbindAll();
+                }
+                this.transition = transition;
+              }
+            }
+          },
+          durationChanged: function() {
+            Platform.endOfMicrotask(function() {
+              this.makeTransition();
+            }.bind(this));
+          },
+          transitionIsStringChanged: function() {
+            if (this.transitionIsString) {
+              this.transition = 'transition-hslide-scale-out';
+            } else {
+              this.makeTransition();
+            }
+          },
+          rewindAction: function() {
+            this.page -= 1;
+            if (this.page < 0) {
+              this.page = this.directional ? this.page + 1 : 4;
+            }
+          },
+          forwardAction: function() {
+            this.page += 1;
+            if (this.page > 4) {
+              this.page = this.directional ? this.page - 1 : 0;
+            }
+          },
+          gotoPage: function(event, detail, target) {
+            this.page = parseInt(target.attributes['data-index'].value,10);
+          },
+          animationEndAction: function() {
+            console.log('animationEnd');
+          }
+        });
+      </script>
+    </polymer-element>
+
+
+
+    <polymer-ui-carousel></polymer-ui-carousel>
+  
+
+
+  </body>
+</html>

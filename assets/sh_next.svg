@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<symbol  id="ic_x5F_chevron_x5F_right_x5F_darkreg" viewBox="0 -24 24 24">
+	<g>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="12.25" y1="-18" x2="12.25" y2="-6">
+			<stop  offset="0" style="stop-color:#000000;stop-opacity:0.7"/>
+			<stop  offset="1" style="stop-color:#000000;stop-opacity:0.6"/>
+		</linearGradient>
+		<polygon fill="url(#SVGID_1_)" points="16,-12 10,-18 8.5,-16.5 13,-12 8.5,-7.5 10,-6 		"/>
+		<g opacity="0.05">
+			<path d="M10-6.707L15.293-12L10-17.293L9.207-16.5l4.146,4.146L13.707-12l-0.354,0.354L9.207-7.5L10-6.707 M10-6L8.5-7.5L13-12
+				l-4.5-4.5L10-18l6,6L10-6L10-6z"/>
+		</g>
+	</g>
+	<polygon fill="none" points="24,-24 0,-24 0,0 24,0 	"/>
+	<g>
+		<g opacity="0.2">
+			<path d="M10-6L8.5-7.5l0.25-0.25L10-6.5l5.75-5.75L16-12L10-6z M8.5-16.5l0.25-0.25L13-12.5v0.5L8.5-16.5z"/>
+		</g>
+	</g>
+	<path fill="#FFFFFF" fill-opacity="0.3" d="M13-12L8.5-7.5V-8l4.25-4.25L13-12z M10-18l-1.5,1.5V-17l1.5-1.5l6,6v0.5L10-18z"/>
+</symbol>
+<use xlink:href="#ic_x5F_chevron_x5F_right_x5F_darkreg"  width="24" height="24" id="XMLID_74_" y="-24" transform="matrix(1 0 0 -1 0 0)" overflow="visible"/>
+</svg>

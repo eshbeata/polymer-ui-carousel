@@ -1,0 +1,17 @@
+{
+  "name": "polymer-carousel",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "polymer-ui-animated-pages": "Polymer/polymer-ui-animated-pages#master",
+    "polymer-flex-layout": "Polymer/polymer-flex-layout#master",
+    "polymer-animation": "Polymer/polymer-animation#master",
+    "polymer-ui-base-css": "Polymer/polymer-ui-base#~0.2.0",
+    "polymer-ui-toolbar": "Polymer/polymer-ui-toolbar#~0.2.0"
+  },
+  "resolutions": {
+    "polymer": "master",
+    "platform": "master",
+    "polymer-flex-layout": "master"
+  }
+}
