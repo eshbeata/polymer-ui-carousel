@@ -20,6 +20,31 @@
         font-family: "Open Sans", Helvetica, Arial, sans-serif;
         clear:both;
       }
+
+      @media only screen and (min-width: 900px) {
+          /* tablets and desktop */
+          polymer-ui-carousel {
+            width: 800px;
+          }
+      }
+
+      @media only screen and (min-width: 768px) and (max-width: 899px) {
+          /* tablets and desktop */
+          polymer-ui-carousel {
+            width: 700px;
+          }
+      }
+
+      @media only screen and (max-width: 767px) {
+          /* phones */
+          polymer-ui-carousel {
+            width: 400px;
+          }   
+
+          polymer-ui-carousel ^^ #controls {
+            display: none;
+          }         
+      }
     </style>
   </head>
   <body class="polymer-ui-body-text polymer-ui-full-bleed polymer-ui-light-bg" unresolved>
