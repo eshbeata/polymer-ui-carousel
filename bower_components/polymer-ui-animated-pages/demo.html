@@ -1,4 +1,9 @@
 <!doctype html>
+<!--
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
 <html class="polymer-ui-full-bleed">
   <head>
     <title>polymer-ui-animated-pages</title>
@@ -7,25 +12,20 @@
     <!-- load toolkit -->
     <script src="../platform/platform.js"></script>
     <!-- import elements-->
-    <link rel="import" href="bower_components/polymer-animation/polymer-animation.html">
-    <link rel="import" href="bower_components/polymer-animation/polymer-animation-group.html">
-    <link rel="import" href="bower_components/polymer-ui-toolbar/polymer-ui-toolbar.html">
-    <link rel="import" href="bower_components/polymer-ui-animated-pages/polymer-ui-animated-pages.html">
+    <link rel="import" href="../polymer-animation/polymer-animation.html">
+    <link rel="import" href="../polymer-animation/polymer-animation-group.html">
+    <link rel="import" href="../polymer-ui-toolbar/polymer-ui-toolbar.html">
+    <link rel="import" href="polymer-ui-animated-pages.html">
     <!-- -->
-    <link rel="stylesheet" href="bower_components/polymer-ui-base-css/base.css">
+    <link rel="stylesheet" href="../polymer-ui-base/base.css">
     <style>
-      polymer-ui-carousel {
+      polymer-ui-animated-pages-demo {
         display: block;
-        height: 450px;
-        width: 800px;
-        background: #4285f4;
-        margin: 30px;
-        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        height: 100%;
       }
     </style>
   </head>
   <body class="polymer-ui-body-text polymer-ui-full-bleed polymer-ui-light-bg" unresolved>
-
     <polymer-element name="transition-hslide-scale-out" extends="polymer-animation-group" noscript>
       <template>
         <polymer-animation id="scale-out" duration="0.5">
@@ -46,7 +46,7 @@
         </polymer-animation>
       </template>
     </polymer-element>
-    <polymer-element name="polymer-ui-carousel">
+    <polymer-element name="polymer-ui-animated-pages-demo">
       <template>
         <style>
           polymer-ui-toolbar {
@@ -70,70 +70,28 @@
             font-size: 100px;
             color: white;
           }
-
-          .btn {
-            cursor: pointer;
-            z-index: 1000;
-            width: 24px;
-            height: 24px;
-            display: block;
-            opacity: .7;
-            border:0;
+          .grid {
+            background: red url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAHklEQVQIW2NkQAX/GZH4/4FsRpgAmAOSBBFwDkgAAIKuBATRTAAZAAAAAElFTkSuQmCC) repeat;
           }
-
-          .btn-prev {
-            left: 0;
-            background: url(assets/sh_prev.svg);
+          .brick {
+            background: green url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQIW2NkwAT/GdHE/gP5jMiCYAGQIpggTACuEq4CatR/ABtJBwTL3L3TAAAAAElFTkSuQmCC) repeat;
           }
-
-          .btn-next {
-            background: url(assets/sh_next.svg); 
-            left: 40px;
+          .wave {
+            background: orange url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAPklEQVQYV2NkwAT/gUKM6MLoAjBFGIqRFaJLovBhCrFaB7QeLg5SiEsRzJlgeQxHY/EcSOg/sQoxgwGHiQwA+f4KCL3Y/AQAAAAASUVORK5CYII=) repeat;
           }
-
-          #controls {
-            margin-left:120px;
+          .dots {
+            background: purple url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=) repeat;
           }
-
-          #controls button {
-            border:0px;
-            background:transparent;
-          }
-
-          .selected {
-            color: #4285f4;
+          .diamonds {
+            background: blue url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUElEQVQYV2NkYGAwBuKzQAwDID4IoIgxIikAMZE1oRiArBDdZBSNMIXoJiFbDZYDKcSmCOYimDuNSVKIzRNYrUYOFuQgweoZbIoxgoeoAAcAEckW11HVTfcAAAAASUVORK5CYII=) repeat;
           }
         </style>
-
-        <polymer-ui-animated-pages id="pages" selected="{{page}}" directional?="{{directional}}" transition="{{transition}}" on-polymer-pages-animation-end="{{animationEndAction}}">
-
-          <div title="Functional">One</div>
-          <div title="Reusable">Two</div>
-          <div title="Encapsulated">Three</div>
-          <div title="Configurable">Four</div>
-          <div title="Composable">Five</div>
-
-        </polymer-ui-animated-pages>
-
         <polymer-ui-toolbar>
-        <!--
           <button on-tap="{{rewindAction}}">&laquo;</button>
           <button on-tap="{{forwardAction}}">&raquo;</button>
--->
-          <button class="btn btn-prev" on-tap="{{rewindAction}}"></button>
-          <button class="btn btn-next" on-tap="{{forwardAction}}"></button>
-
-          <div id="controls">
-            <template repeat="{{ item in itemList }}">
-              <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{item.value}} </button>
-            </template>
-          </div>
-          <!--
           <span class="spacer"></span>
           <button>+</button>
           <span class="spacer"></span>
-        -->
-        <!--
           <label>
             Directional:
             <input type="checkbox" checked="{{directional}}">
@@ -143,8 +101,6 @@
             Str Trans:
             <input type="checkbox" checked="{{transitionIsString}}">
           </label>
-        -->
-          <!--
           <span class="spacer"></span>
           <label>
             TransIn:
@@ -164,16 +120,19 @@
               <option>scale-out</option>
             </select>
           </label>
-        -->
-          <!--
           <span class="spacer"></span>
           <label>
             Duration:
             <input value="{{duration}}" size="4">
           </label>
-          -->
         </polymer-ui-toolbar>
-
+        <polymer-ui-animated-pages selected="{{page}}" directional?="{{directional}}" transition="{{transition}}" on-polymer-pages-animation-end="{{animationEndAction}}">
+          <div class="grid" value="one">One</div>
+          <div class="brick" value="two">Two</div>
+          <div class="wave">Three</div>
+          <div class="dots">Four</div>
+          <div class="diamonds">Five</div>
+        </polymer-ui-animated-pages>
         <polymer-animation id="fade-in" duration="{{duration}}">
           <polymer-animation-keyframe>
             <polymer-animation-prop name="opacity" value="0"></polymer-animation-prop>
@@ -216,33 +175,25 @@
         </polymer-animation>
       </template>
       <script>
-        Polymer('polymer-ui-carousel', {
+        Polymer('polymer-ui-animated-pages-demo', {
           page: 0,
           directional: true,
           transitionIsString: false,
           duration: 0.5,
           transitionInIndex: 2,
           transitionOutIndex: 2,
-          itemList: [],
           observe: {
             transitionInIndex: 'makeTransition',
             transitionOutIndex: 'makeTransition'
           },
           ready: function() {
             this.transitionIsStringChanged();
-            this.$.pages.items.forEach(function(node, index){
-              this.itemList.push({ value: node.getAttribute('title'), index: index });
-            }.bind(this));
           },
           makeTransition: function() {
             if (!this.transitionIsString) {
-              //var transitionInId = this.$.transitionInSelect.selectedOptions[0].textContent;
-
-              var transitionInId = 'hslide-in';
+              var transitionInId = this.$.transitionInSelect.selectedOptions[0].textContent;
               var transitionIn = this.$[transitionInId];
-
-              //var transitionOutId = this.$.transitionOutSelect.selectedOptions[0].textContent;
-              var transitionOutId = 'hslide-out';
+              var transitionOutId = this.$.transitionOutSelect.selectedOptions[0].textContent;
               var transitionOut = this.$[transitionOutId];
               if (transitionIn && transitionOut) {
                 var transition = document.createElement('polymer-animation-group');
@@ -279,21 +230,12 @@
               this.page = this.directional ? this.page - 1 : 0;
             }
           },
-          gotoPage: function(event, detail, target) {
-            this.page = parseInt(target.attributes['data-index'].value,10);
-          },
           animationEndAction: function() {
             console.log('animationEnd');
           }
         });
       </script>
     </polymer-element>
-
-
-
-    <polymer-ui-carousel></polymer-ui-carousel>
-  
-
-
+    <polymer-ui-animated-pages-demo></polymer-ui-animated-pages-demo>
   </body>
 </html>
