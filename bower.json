@@ -7,7 +7,8 @@
     "polymer-flex-layout": "Polymer/polymer-flex-layout#master",
     "polymer-animation": "Polymer/polymer-animation#master",
     "polymer-ui-base-css": "Polymer/polymer-ui-base#~0.2.0",
-    "polymer-ui-toolbar": "Polymer/polymer-ui-toolbar#~0.2.0"
+    "polymer-ui-toolbar": "Polymer/polymer-ui-toolbar#~0.2.0",
+    "platform": "Polymer/platform#~0.2.0"
   },
   "resolutions": {
     "polymer": "master",
