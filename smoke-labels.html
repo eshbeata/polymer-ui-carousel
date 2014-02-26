@@ -1,0 +1,77 @@
+<!doctype html>
+<html class="polymer-ui-full-bleed">
+  <head>
+    <title>polymer-ui-carousel</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- load toolkit -->
+    <script src="bower_components/platform/platform.js"></script>
+
+    <link rel="import" href="polymer-ui-carousel.html">
+
+    <link rel="stylesheet" href="bower_components/polymer-ui-base-css/base.css">
+    <style>
+      polymer-ui-carousel {
+        display: block;
+        height: 450px;
+        width: 800px;
+        background: #4285f4;
+        margin: 30px;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        clear:both;
+      }
+
+      polymer-ui-carousel ^^ #controls button {
+        font-size:14px;
+      }
+
+      @media only screen and (min-width: 900px) {
+          /* tablets and desktop */
+          polymer-ui-carousel {
+            width: 800px;
+          }
+      }
+
+      @media only screen and (min-width: 768px) and (max-width: 899px) {
+          /* tablets and desktop */
+          polymer-ui-carousel {
+            width: 700px;
+          }
+      }
+
+      @media only screen and (max-width: 767px) {
+          /* phones */
+          polymer-ui-carousel {
+            width: 400px;
+          }   
+
+          polymer-ui-carousel ^^ #controls {
+            display: none;
+          }         
+      }
+
+      @media only screen and (max-width: 350px) {
+          /* phones */
+          polymer-ui-carousel {
+            width: 300px;
+          }   
+
+          polymer-ui-carousel ^^ #controls {
+            display: none;
+          }         
+      }
+    </style>
+  </head>
+  <body class="polymer-ui-body-text polymer-ui-full-bleed polymer-ui-light-bg" unresolved>
+
+  <polymer-ui-carousel textLabels="true">
+    <div title="Functional">One</div>
+    <div title="Reusable">Two</div>
+    <div title="Encapsulated">Three</div>
+    <div title="Configurable">Four</div>
+    <div title="Composable">Five</div>
+  </polymer-ui-carousel>
+
+
+  </body>
+</html>
