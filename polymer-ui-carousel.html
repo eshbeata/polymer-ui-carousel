@@ -25,7 +25,7 @@
     </template>
   </polymer-element>
 
-  <polymer-element name="polymer-ui-carousel" extends="polymer-ui-animated-pages">
+  <polymer-element name="polymer-ui-carousel" extends="polymer-ui-animated-pages" attributes="textLabels">
     <template>
       <style>
         polymer-ui-toolbar {
@@ -71,18 +71,19 @@
         }
 
         #controls {
-          margin-left:120px;
+          float:left;
+          margin:0 auto;
         }
 
         #controls button {
           border:0px;
           background:transparent;
+          font-size: 30px;
         }
 
         .selected {
-          color: #4285f4;
+          color: #4285f4;;
         }
-
       </style>
 
       <polymer-ui-animated-pages id="pages" selected="{{page}}" directional?="{{directional}}" transition="{{transition}}" on-polymer-pages-animation-end="{{animationEndAction}}" on-tap="{{forwardAction}}">
@@ -97,7 +98,7 @@
 
         <div id="controls">
           <template repeat="{{ item in itemList }}">
-            <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{item.value}} </button>
+            <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{ textLabels? item.value : '&#8226;'}} </button>
           </template>
         </div>
         <!--
@@ -190,6 +191,7 @@
     <script>
       Polymer('polymer-ui-carousel', {
         page: 0,
+        textLabels: false,
         directional: true,
         transitionIsString: false,
         duration: 0.5,
