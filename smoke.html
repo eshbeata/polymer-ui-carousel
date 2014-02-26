@@ -21,6 +21,11 @@
         clear:both;
       }
 
+      polymer-ui-carousel ^^ polymer-ui-animated-pages ::content > div {
+        font-size: 100px;
+        color: white;
+      } 
+
       @media only screen and (min-width: 900px) {
           /* tablets and desktop */
           polymer-ui-carousel {
@@ -57,11 +62,11 @@
   <body class="polymer-ui-body-text polymer-ui-full-bleed polymer-ui-light-bg" unresolved>
 
   <polymer-ui-carousel textLabels="false">
-    <div title="Functional">One</div>
-    <div title="Reusable">Two</div>
-    <div title="Encapsulated">Three</div>
-    <div title="Configurable">Four</div>
-    <div title="Composable">Five</div>
+    <div>One</div>
+    <div>Two</div>
+    <div>Three</div>
+    <div>Four</div>
+    <div>Five</div>
   </polymer-ui-carousel>
 
 
