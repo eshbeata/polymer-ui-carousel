@@ -47,7 +47,7 @@ With bullet controls:
 With text label controls:
 
 ```html
-  <polymer-ui-carousel textLabels="true">
+  <polymer-ui-carousel labels="true">
     <div title="Alpha">One</div>
     <div title="Beta">Two</div>
     <div title="Gamma">Three</div>

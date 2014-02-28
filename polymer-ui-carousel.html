@@ -20,7 +20,7 @@
  *
  * With text label controls:
  *
- *  <polymer-ui-carousel textLabels="true">
+ *  <polymer-ui-carousel labels="true">
  *   <div title="Alpha">One</div>
  *   <div title="Beta">Two</div>
  *   <div title="Gamma">Three</div>
@@ -62,7 +62,7 @@
     </template>
   </polymer-element>
 
-  <polymer-element name="polymer-ui-carousel" extends="polymer-ui-animated-pages" attributes="textLabels">
+  <polymer-element name="polymer-ui-carousel" extends="polymer-ui-animated-pages" attributes="labels">
     <template>
       <style>
         polymer-ui-toolbar {
@@ -138,7 +138,7 @@
 
         <div id="controls">
           <template repeat="{{ item in itemList }}">
-            <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{ textLabels? item.value : '&#8226;'}} </button>
+            <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{ labels? item.value : '&#8226;'}} </button>
           </template>
         </div>
       </polymer-ui-toolbar>
@@ -187,7 +187,7 @@
     <script>
       Polymer('polymer-ui-carousel', {
         page: 0,
-        textLabels: false,
+        labels: false,
         directional: true,
         transitionIsString: false,
         duration: 0.5,
