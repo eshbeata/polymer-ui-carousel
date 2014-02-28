@@ -8,6 +8,11 @@ A [Polymer](http://www.polymer-project.org) carousel element
 
 > [Demo 1](http://addyosmani.github.io/polymer-ui-carousel/smoke.html) and [Demo 2](http://addyosmani.github.io/polymer-ui-carousel/smoke-labels.html).
 
+<img src="https://f.cloud.github.com/assets/110953/2293457/8f385680-a06d-11e3-89b3-1201463d92f5.png" style="width:300px"/>
+
+<img src="https://f.cloud.github.com/assets/110953/2293458/8f54146a-a06d-11e3-8f1b-c0ac1fe95d4b.png" style="width:300px"/>
+
+
 ## Install
 
 Install with [Bower](http://bower.io):
