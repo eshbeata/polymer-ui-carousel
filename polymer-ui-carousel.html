@@ -1,3 +1,40 @@
+<!--
+/**
+ * @module polymer-ui-carousel
+ */
+/**
+ * Element allowing a user to browse through a set of 
+ * items.
+ *
+ * Examples:
+ *
+ *  With the default bullet controls:
+ *  
+ *  <polymer-ui-carousel>
+ *   <div>One</div>
+ *   <div>Two</div>
+ *   <div>Three</div>
+ *   <div>Four</div>
+ *   <div>Five</div>
+ * </polymer-ui-carousel>
+ *
+ * With text label controls:
+ *
+ *  <polymer-ui-carousel textLabels="true">
+ *   <div title="Alpha">One</div>
+ *   <div title="Beta">Two</div>
+ *   <div title="Gamma">Three</div>
+ *   <div title="Delta">Four</div>
+ *   <div title="Epsilon">Five</div>
+ * </polymer-ui-carousel>
+ *
+ * @class polymer-ui-carousel
+ * @blurb A Polymer carousel element
+ * @author Addy Osmani
+ * @categories carousel
+ *
+ */
+-->
   <!-- import elements-->
   <link rel="import" href="bower_components/polymer-animation/polymer-animation.html">
   <link rel="import" href="bower_components/polymer-animation/polymer-animation-group.html">
@@ -41,16 +78,15 @@
         polymer-ui-animated-pages {
           display: block;
           height: 100%;
+          overflow: hidden;
         }
         polymer-ui-animated-pages ::content > div {
           display: -webkit-flex;
           align-items: center;
           justify-content: center;
-          /*font-size: 100px;
-          color: white;*/
         }
 
-        .btn {
+        polymer-ui-toolbar .btn {
           cursor: pointer;
           z-index: 1000;
           width: 24px;
@@ -60,14 +96,18 @@
           border:0;
         }
 
-        .btn-prev {
-          left: 0;
-          background: url(assets/sh_prev.svg);
+        polymer-ui-toolbar .disabled {
+          opacity: .3;
         }
 
-        .btn-next {
-          background: url(assets/sh_next.svg); 
+        polymer-ui-toolbar .btn-prev {
+          left: 0;
+          background: url(assets/arrow-back.png);
+        }
+
+        polymer-ui-toolbar .btn-next {
           left: 40px;
+          background: url(assets/arrow-forward.png);
         }
 
         #controls {
@@ -93,58 +133,14 @@
       </polymer-ui-animated-pages>
 
       <polymer-ui-toolbar>
-        <button class="btn btn-prev" on-tap="{{rewindAction}}"></button>
-        <button class="btn btn-next" on-tap="{{forwardAction}}"></button>
+        <button class="btn btn-prev {{ {disabled: page == '0'} | tokenList }}" on-tap="{{rewindAction}}" ></button>
+        <button class="btn btn-next {{ {disabled: page == itemsCount-1} | tokenList }}" on-tap="{{forwardAction}}"></button>
 
         <div id="controls">
           <template repeat="{{ item in itemList }}">
             <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{ textLabels? item.value : '&#8226;'}} </button>
           </template>
         </div>
-        <!--
-        <span class="spacer"></span>
-        <button>+</button>
-        <span class="spacer"></span>
-      -->
-      <!--
-        <label>
-          Directional:
-          <input type="checkbox" checked="{{directional}}">
-        </label>
-        <span class="spacer"></span>
-        <label>
-          Str Trans:
-          <input type="checkbox" checked="{{transitionIsString}}">
-        </label>
-      -->
-        <!--
-        <span class="spacer"></span>
-        <label>
-          TransIn:
-          <select id="transitionInSelect" selectedIndex="{{transitionInIndex}}">
-            <option>none</option>
-            <option>fade-in</option>
-            <option>hslide-in</option>
-          </select>
-        </label>
-        <span class="spacer"></span>
-        <label>
-          TransOut:
-          <select id="transitionOutSelect" selectedIndex="{{transitionOutIndex}}">
-            <option>none</option>
-            <option>fade-out</option>
-            <option>hslide-out</option>
-            <option>scale-out</option>
-          </select>
-        </label>
-      -->
-        <!--
-        <span class="spacer"></span>
-        <label>
-          Duration:
-          <input value="{{duration}}" size="4">
-        </label>
-        -->
       </polymer-ui-toolbar>
 
       <polymer-animation id="fade-in" duration="{{duration}}">
@@ -207,14 +203,13 @@
           this.$.pages.items.forEach(function(node, index){
             this.itemList.push({ value: node.getAttribute('title'), index: index });
           }.bind(this));
+          this.itemsCount = this.itemList.length;
         },
         makeTransition: function() {
           if (!this.transitionIsString) {
-            //var transitionInId = this.$.transitionInSelect.selectedOptions[0].textContent;
-
+            // var transitionInId = this.$.transitionInSelect.selectedOptions[0].textContent;
             var transitionInId = 'hslide-in';
             var transitionIn = this.$[transitionInId];
-
             //var transitionOutId = this.$.transitionOutSelect.selectedOptions[0].textContent;
             var transitionOutId = 'hslide-out';
             var transitionOut = this.$[transitionOutId];
@@ -257,7 +252,7 @@
           this.page = parseInt(target.attributes['data-index'].value,10);
         },
         animationEndAction: function() {
-          console.log('animationEnd');
+          // console.log('animationEnd');
         }
       });
     </script>
