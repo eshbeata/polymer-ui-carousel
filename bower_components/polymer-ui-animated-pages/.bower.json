@@ -7,11 +7,11 @@
     "polymer-ui-pages": "Polymer/polymer-ui-pages#master"
   },
   "homepage": "https://github.com/Polymer/polymer-ui-animated-pages",
-  "_release": "03a058c1da",
+  "_release": "5ae385f51f",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "03a058c1da16c33a0c2446af3b1826f45aca37bd"
+    "commit": "5ae385f51f817dbd39d0e613a30fa6529068ed9f"
   },
   "_source": "git://github.com/Polymer/polymer-ui-animated-pages.git",
   "_target": "master",
