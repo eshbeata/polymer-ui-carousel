@@ -62,7 +62,7 @@
     </template>
   </polymer-element>
 
-  <polymer-element name="polymer-ui-carousel" extends="polymer-ui-animated-pages" attributes="labels">
+  <polymer-element name="polymer-ui-carousel" extends="polymer-ui-animated-pages" attributes="labels" tabIndex="0">
     <template>
       <style>
         polymer-ui-toolbar {
@@ -102,12 +102,10 @@
 
         polymer-ui-toolbar .btn-prev {
           left: 0;
-          background: url(assets/arrow-back.png);
         }
 
         polymer-ui-toolbar .btn-next {
           left: 40px;
-          background: url(assets/arrow-forward.png);
         }
 
         #controls {
@@ -132,13 +130,15 @@
 
       </polymer-ui-animated-pages>
 
-      <polymer-ui-toolbar>
-        <button class="btn btn-prev {{ {disabled: page == '0'} | tokenList }}" on-tap="{{rewindAction}}" ></button>
-        <button class="btn btn-next {{ {disabled: page == itemsCount-1} | tokenList }}" on-tap="{{forwardAction}}"></button>
+      <polymer-ui-toolbar aria-label="carousel buttons" on-keypress="{{keypressHandler}}" tabIndex="1">
 
-        <div id="controls">
+      <input type="image" src="assets/arrow-back.png" alt="Previous Slide" aria-label="previous" class="carousel-button btn btn-prev {{ {disabled: page == '0'} | tokenList }}" on-tap="{{rewindAction}}" tabIndex="2"/>
+
+      <input type="image" src="assets/arrow-forward.png" alt="Next Slide" aria-label="next" class="carousel-button btn btn-next {{ {disabled: page == itemsCount-1} | tokenList }}" on-tap="{{forwardAction}}" tabIndex="3"/>
+
+        <div id="controls" aria-controls="pages">
           <template repeat="{{ item in itemList }}">
-            <button on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{ labels? item.value : '&#8226;'}} </button>
+            <button aria-label="item-{{item.index}}" tabIndex="{{4 + item.index}}" alt="{{item.index}}" on-tap="{{gotoPage}}" data-index="{{item.index}}" class="{{ {selected: item.index == page} | tokenList }}">{{ labels? item.value : '&#8226;'}} </button>
           </template>
         </div>
       </polymer-ui-toolbar>
@@ -249,10 +249,24 @@
           }
         },
         gotoPage: function(event, detail, target) {
-          this.page = parseInt(target.attributes['data-index'].value,10);
+          this.page = parseInt(target.attributes['data-index'].value, 10);
         },
         animationEndAction: function() {
           // console.log('animationEnd');
+        },
+        keypressHandler: function(event, detail, sender) {
+          // enter
+          if (event.keyCode == 13) {
+           // previous 
+           if (event.target.tabIndex == 2) {
+            this.rewindAction();
+           } else if (event.target.tabIndex == 3) {
+            // next
+            this.forwardAction();
+           } else {
+            this.page = parseInt(event.target.attributes['data-index'].value,10);
+           }
+          }
         }
       });
     </script>
